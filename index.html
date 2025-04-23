@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Say No to Drugs - Kerala Drug Overdose Awareness</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@400;700&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            background: #000;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        .vignette {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            box-shadow: inset 0 0 200px rgba(0, 0, 0, 1);
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .avatar-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .avatar {
+            position: absolute;
+            width: 40px;
+            height: 60px;
+            background-size: cover;
+            background-image: url('/public/whiteavatar.png');
+            transition: opacity 1s ease;
+            opacity: 0.5;
+        }
+
+        .avatar.dying-red {
+            background-image: url('/public/redavatar.png');
+        }
+
+        .avatar.dead {
+            background-image: url('/public/darkavatar.png');
+            opacity: 0;
+        }
+
+        .content-container {
+            position: relative;
+            z-index: 3;
+            background: #000;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 1);
+            width: 90%;
+            max-width: 700px;
+        }
+
+        .main-content {
+            display: none;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        .fade-in {
+            opacity: 1;
+        }
+
+        .section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .accordion-header {
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .accordion-header:hover {
+            background: rgba(239, 68, 68, 0.2);
+        }
+
+        .accordion-content {
+            display: block;
+            transition: max-height 0.3s ease;
+        }
+
+        .btn-red {
+            background: #EF4444;
+            transition: background 0.3s ease;
+        }
+
+        .btn-red:hover {
+            background: #DC2626;
+        }
+
+        .btn-offwhite {
+            background: #F5F5F5;
+            color: #000;
+            transition: background 0.3s ease;
+        }
+
+        .btn-offwhite:hover {
+            background: #E5E5E5;
+        }
+
+        .text-offwhite {
+            color: #F5F5F5;
+        }
+
+        .bg-black {
+            background: #000;
+        }
+
+        .hover\:bg-dark-offwhite:hover {
+            background: #E5E5E5;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex flex-col items-center justify-center text-offwhite">
+    <!-- Loading Page -->
+    <div id="loadingPage" class="min-h-screen flex flex-col items-center justify-center">
+        <div class="avatar-container" id="avatarContainer"></div>
+        <div class="vignette"></div>
+        <div class="content-container text-center relative">
+            <h1 class="text-5xl md:text-6xl font-bold mb-6" style="font-family: 'Anton', sans-serif;">Say No to Drugs
+            </h1>
+            <div class="mb-6">
+                <span id="deathCount" class="text-[160px] md:text-[240px] font-extrabold leading-none text-offwhite"
+                    style="font-family: 'Anton', sans-serif;"></span>
+                <div class="text-5xl md:text-6xl font-semibold text-red-500 mt-2"
+                    style="font-family: 'Anton', sans-serif;" id="year"></div>
+                <p class="text-2xl md:text-3xl text-offwhite mt-4" style="font-family: 'Oswald', sans-serif;">Every
+                    Minute Counts</p>
+            </div>
+            <button id="skipButton" class="btn-offwhite px-6 py-2 rounded-full text-sm font-semibold"
+                style="font-family: 'Oswald', sans-serif;">Home</button>
+        </div>
+    </div>
+
+    <!-- Main Page -->
+    <div id="mainContent" class="main-content">
+        <!-- Header -->
+        <header class="bg-black py-4 fixed top-0 w-full z-10">
+            <nav class="container mx-auto flex justify-between items-center px-4">
+                <div class="text-3xl font-bold" style="font-family: 'Anton', sans-serif;">Zago</div>
+                <div class="space-x-4">
+                    <a href="#home" class="text-offwhite hover:text-red-500"
+                        style="font-family: 'Oswald', sans-serif;">Home</a>
+                    <a href="#resources" class="text-offwhite hover:text-red-500"
+                        style="font-family: 'Oswald', sans-serif;">Resources</a>
+                    <a href="#blog" class="text-offwhite hover:text-red-500"
+                        style="font-family: 'Oswald', sans-serif;">Blog</a>
+                    <a href="#contact" class="text-offwhite hover:text-red-500"
+                        style="font-family: 'Oswald', sans-serif;">Contact</a>
+                    <button class="btn-red text-offwhite px-4 py-2 rounded-lg"
+                        style="font-family: 'Oswald', sans-serif;">Get Help</button>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Hero Section -->
+        <section id="home" class="min-h-screen flex items-center justify-center text-center px-4 pt-20">
+            <div class="section">
+                <h1 class="text-6xl md:text-8xl font-extrabold mb-6" style="font-family: 'Anton', sans-serif;">
+                    Every Minute Counts: Say No to Drugs
+                </h1>
+                <p class="text-xl md:text-2xl text-offwhite mb-8 max-w-2xl mx-auto"
+                    style="font-family: 'Oswald', sans-serif;">
+                    Join the fight against drug addiction in Kerala. Together, we can make a difference and save lives.
+                </p>
+                <div class="space-x-4">
+                    <a href="#resources" class="btn-red text-offwhite px-6 py-3 rounded-lg inline-block"
+                        style="font-family: 'Oswald', sans-serif;">Learn More</a>
+                    <a href="#contact"
+                        class="border border-offwhite text-offwhite px-6 py-3 rounded-lg inline-block hover:bg-dark-offwhite"
+                        style="font-family: 'Oswald', sans-serif;">Get Help</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Benefits Section -->
+        <section class="py-16 px-4">
+            <div class="container mx-auto section">
+                <h2 class="text-5xl md:text-6xl font-bold mb-12 text-center" style="font-family: 'Anton', sans-serif;">
+                    The Powerful Benefits of a Drug-Free Lifestyle
+                </h2>
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="md:w-1/2 mb-8 md:mb-0">
+                        <p class="text-lg md:text-xl text-offwhite mb-4" style="font-family: 'Oswald', sans-serif;">
+                            Choosing a drug-free life opens the door to better health, stronger relationships, and
+                            financial stability. It’s a journey worth taking.
+                        </p>
+                        <ul class="text-offwhite space-y-2" style="font-family: 'Oswald', sans-serif;">
+                            <li>• <strong>Improved Health:</strong> Reduce the risk of chronic diseases and mental
+                                health issues.</li>
+                            <li>• <strong>Stronger Relationships:</strong> Build trust and deeper connections with loved
+                                ones.</li>
+                            <li>• <strong>Financial Freedom:</strong> Save money spent on drugs for a brighter future.
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="md:w-1/2">
+                        <div class="bg-black h-64 rounded-lg flex items-center justify-center border border-offwhite">
+                            <p class="text-offwhite italic" style="font-family: 'Oswald', sans-serif;">Illustration
+                                Prompt: A bold scene of a happy family enjoying a picnic in a park, symbolizing a
+                                drug-free, healthy lifestyle. Use a black background with red and offwhite accents for a
+                                dramatic effect.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="py-16 px-4 bg-black">
+            <div class="container mx-auto section">
+                <h2 class="text-5xl md:text-6xl font-bold mb-12 text-center" style="font-family: 'Anton', sans-serif;">
+                    FAQs
+                </h2>
+                <div class="space-y-4 max-w-3xl mx-auto">
+                    <div class="accordion">
+                        <div class="accordion-header bg-black p-4 rounded-lg border border-offwhite">
+                            <h3 class="text-xl font-semibold" style="font-family: 'Anton', sans-serif;">What are drugs?
+                            </h3>
+                        </div>
+                        <div class="accordion-content p-4 text-offwhite" style="font-family: 'Oswald', sans-serif;">
+                            Drugs are substances that alter the body’s physical or mental state. While some are legal
+                            (like alcohol or prescription meds), others, like heroin or cocaine, are illegal and highly
+                            addictive.
+                        </div>
+                    </div>
+                    <div class="accordion">
+                        <div class="accordion-header bg-black p-4 rounded-lg border border-offwhite">
+                            <h3 class="text-xl font-semibold" style="font-family: 'Anton', sans-serif;">How do I help
+                                someone struggling with addiction?</h3>
+                        </div>
+                        <div class="accordion-content p-4 text-offwhite" style="font-family: 'Oswald', sans-serif;">
+                            Be supportive, encourage them to seek professional help, and educate yourself about
+                            addiction. Avoid judgment and connect them with local resources like counseling or rehab
+                            centers in Kerala.
+                        </div>
+                    </div>
+                    <div class="accordion">
+                        <div class="accordion-header bg-black p-4 rounded-lg border border-offwhite">
+                            <h3 class="text-xl font-semibold" style="font-family: 'Anton', sans-serif;">What are the
+                                signs of drug abuse?</h3>
+                        </div>
+                        <div class="accordion-content p-4 text-offwhite" style="font-family: 'Oswald', sans-serif;">
+                            Look for changes in behavior, such as withdrawal from social activities, sudden mood swings,
+                            neglecting responsibilities, or physical signs like bloodshot eyes or weight loss.
+                        </div>
+                    </div>
+                    <div class="accordion">
+                        <div class="accordion-header bg-black p-4 rounded-lg border border-offwhite">
+                            <h3 class="text-xl font-semibold" style="font-family: 'Anton', sans-serif;">What resources
+                                are available?</h3>
+                        </div>
+                        <div class="accordion-content p-4 text-offwhite" style="font-family: 'Oswald', sans-serif;">
+                            In Kerala, you can access government helplines, NGOs like the Kerala State Substance Abuse
+                            Prevention Program, and rehab centers. National helplines like 1800-11-0031 are also
+                            available.
+                        </div>
+                    </div>
+                    <div class="accordion">
+                        <div class="accordion-header bg-black p-4 rounded-lg border border-offwhite">
+                            <h3 class="text-xl font-semibold" style="font-family: 'Anton', sans-serif;">How can I stay
+                                safe?</h3>
+                        </div>
+                        <div class="accordion-content p-4 text-offwhite" style="font-family: 'Oswald', sans-serif;">
+                            Educate yourself about the risks, avoid peer pressure, and seek support if you’re
+                            struggling. Joining community programs or awareness campaigns can also help.
+                        </div>
+                    </div>
+                </div>
+                <p class="text-center text-offwhite mt-8" style="font-family: 'Oswald', sans-serif;">
+                    Still have questions? <a href="#contact" class="text-red-500 hover:underline">Reach out to us</a>.
+                </p>
+            </div>
+        </section>
+
+        <!-- Statistics Section -->
+        <section class="py-16 px-4">
+            <div class="container mx-auto section">
+                <h2 class="text-5xl md:text-6xl font-bold mb-12 text-center" style="font-family: 'Anton', sans-serif;">
+                    Drug Abuse Statistics in Kerala
+                </h2>
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="md:w-1/2 mb-8 md:mb-0">
+                        <p class="text-lg md:text-xl text-offwhite mb-4" style="font-family: 'Oswald', sans-serif;">
+                            Drug abuse remains a pressing issue in Kerala, affecting communities and families across the
+                            state.
+                        </p>
+                        <ul class="text-offwhite space-y-2" style="font-family: 'Oswald', sans-serif;">
+                            <li>• Alcohol and cannabis are the most abused substances, with 25% of users aged 15–24.
+                            </li>
+                            <li>• Over 500 arrests related to drug trafficking were made in 2024 alone.</li>
+                            <li>• Rural areas report a 15% increase in opioid misuse over the past 5 years.</li>
+                        </ul>
+                    </div>
+                    <div class="md:w-1/2">
+                        <div class="bg-black h-64 rounded-lg flex items-center justify-center border border-offwhite">
+                            <p class="text-offwhite italic" style="font-family: 'Oswald', sans-serif;">Illustration
+                                Prompt: A dramatic bar chart showing the rise in drug abuse cases in Kerala from 2017 to
+                                2024, with a focus on synthetic drugs. Use a black background with red bars and offwhite
+                                labels for a bold, impactful look.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recovery Steps Section -->
+        <section class="py-16 px-4 bg-black">
+            <div class="container mx-auto section">
+                <h2 class="text-5xl md:text-6xl font-bold mb-12 text-center" style="font-family: 'Anton', sans-serif;">
+                    Steps to Seek Help and Recover
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="text-center">
+                        <div class="bg-black p-6 rounded-lg border border-offwhite">
+                            <div class="text-2xl font-semibold mb-4 text-offwhite"
+                                style="font-family: 'Anton', sans-serif;">[Identify]</div>
+                            <h3 class="text-xl font-semibold mb-2" style="font-family: 'Anton', sans-serif;">Step 1:
+                                Identify the Problem</h3>
+                            <p class="text-offwhite" style="font-family: 'Oswald', sans-serif;">
+                                Acknowledge the addiction and understand its impact on your life and loved ones.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <div class="bg-black p-6 rounded-lg border border-offwhite">
+                            <div class="text-2xl font-semibold mb-4 text-offwhite"
+                                style="font-family: 'Anton', sans-serif;">[Seek Help]</div>
+                            <h3 class="text-xl font-semibold mb-2" style="font-family: 'Anton', sans-serif;">Step 2:
+                                Seek Professional Help</h3>
+                            <p class="text-offwhite" style="font-family: 'Oswald', sans-serif;">
+                                Consult doctors, counselors, or rehab centers for a tailored recovery plan.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <div class="bg-black p-6 rounded-lg border border-offwhite">
+                            <div class="text-2xl font-semibold mb-4 text-offwhite"
+                                style="font-family: 'Anton', sans-serif;">[Recover]</div>
+                            <h3 class="text-xl font-semibold mb-2" style="font-family: 'Anton', sans-serif;">Step 3:
+                                Commit to Recovery</h3>
+                            <p class="text-offwhite" style="font-family: 'Oswald', sans-serif;">
+                                Stay dedicated with support groups, therapy, and lifestyle changes.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="py-16 px-4">
+            <div class="container mx-auto section text-center">
+                <h2 class="text-5xl md:text-6xl font-bold mb-6" style="font-family: 'Anton', sans-serif;">
+                    Take Action Against Drug Abuse
+                </h2>
+                <p class="text-xl md:text-2xl text-offwhite mb-8 max-w-2xl mx-auto"
+                    style="font-family: 'Oswald', sans-serif;">
+                    Your support can save lives. Join our movement or seek help today.
+                </p>
+                <div class="space-x-4">
+                    <a href="#resources" class="btn-red text-offwhite px-6 py-3 rounded-lg inline-block"
+                        style="font-family: 'Oswald', sans-serif;">Get Help</a>
+                    <a href="#blog"
+                        class="border border-offwhite text-offwhite px-6 py-3 rounded-lg inline-block hover:bg-dark-offwhite"
+                        style="font-family: 'Oswald', sans-serif;">Learn More</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Blog Section -->
+        <section id="blog" class="py-16 px-4 bg-black">
+            <div class="container mx-auto section">
+                <h2 class="text-5xl md:text-6xl font-bold mb-12 text-center" style="font-family: 'Anton', sans-serif;">
+                    Latest Insights on Recovery
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-black p-6 rounded-lg border border-offwhite">
+                        <div
+                            class="bg-black h-40 rounded-lg mb-4 flex items-center justify-center border border-offwhite">
+                            <p class="text-offwhite italic" style="font-family: 'Oswald', sans-serif;">Illustration
+                                Prompt: A dramatic scene of a group of teens in a support group meeting, sharing their
+                                experiences. Use a black background with red and offwhite tones for a bold, impactful
+                                look.</p>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2" style="font-family: 'Anton', sans-serif;">Understanding
+                            Teen Substance Abuse</h3>
+                        <p class="text-offwhite mb-4" style="font-family: 'Oswald', sans-serif;">
+                            Learn how peer pressure and stress contribute to teen drug use in Kerala.
+                        </p>
+                        <a href="#" class="text-red-500 hover:underline" style="font-family: 'Oswald', sans-serif;">Read
+                            More</a>
+                    </div>
+                    <div class="bg-black p-6 rounded-lg border border-offwhite">
+                        <div
+                            class="bg-black h-40 rounded-lg mb-4 flex items-center justify-center border border-offwhite">
+                            <p class="text-offwhite italic" style="font-family: 'Oswald', sans-serif;">Illustration
+                                Prompt: A bold illustration of a parent comforting a child during a therapy session,
+                                symbolizing support in recovery. Use a black background with red and offwhite accents
+                                for a dramatic effect.</p>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2" style="font-family: 'Anton', sans-serif;">Guiding Your
+                            Child Through Recovery</h3>
+                        <p class="text-offwhite mb-4" style="font-family: 'Oswald', sans-serif;">
+                            Tips for parents to support their children during the recovery process.
+                        </p>
+                        <a href="#" class="text-red-500 hover:underline" style="font-family: 'Oswald', sans-serif;">Read
+                            More</a>
+                    </div>
+                    <div class="bg-black p-6 rounded-lg border border-offwhite">
+                        <div
+                            class="bg-black h-40 rounded-lg mb-4 flex items-center justify-center border border-offwhite">
+                            <p class="text-offwhite italic" style="font-family: 'Oswald', sans-serif;">Illustration
+                                Prompt: A dramatic scene of an individual standing triumphantly on a mountain,
+                                symbolizing recovery success. Use a black background with red and offwhite tones for a
+                                bold, impactful look.</p>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2" style="font-family: 'Anton', sans-serif;">Stories of Hope
+                            and Healing</h3>
+                        <p class="text-offwhite mb-4" style="font-family: 'Oswald', sans-serif;">
+                            Inspiring stories from individuals who overcame addiction in Kerala.
+                        </p>
+                        <a href="#" class="text-red-500 hover:underline" style="font-family: 'Oswald', sans-serif;">Read
+                            More</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="bg-black py-8 px-4">
+            <div class="container mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-4" style="font-family: 'Anton', sans-serif;">Zago</h3>
+                        <p class="text-offwhite" style="font-family: 'Oswald', sans-serif;">
+                            Fighting drug abuse in Kerala, one step at a time.
+                        </p>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-4" style="font-family: 'Anton', sans-serif;">Resources</h3>
+                        <ul class="text-offwhite space-y-2" style="font-family: 'Oswald', sans-serif;">
+                            <li><a href="#" class="hover:underline">Helplines</a></li>
+                            <li><a href="#" class="hover:underline">Rehab Centers</a></li>
+                            <li><a href="#" class="hover:underline">Support Groups</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-4" style="font-family: 'Anton', sans-serif;">Follow Us</h3>
+                        <ul class="text-offwhite space-y-2" style="font-family: 'Oswald', sans-serif;">
+                            <li><a href="#" class="hover:underline">Twitter</a></li>
+                            <li><a href="#" class="hover:underline">Instagram</a></li>
+                            <li><a href="#" class="hover:underline">Facebook</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-4" style="font-family: 'Anton', sans-serif;">Contact Info
+                        </h3>
+                        <ul class="text-offwhite space-y-2" style="font-family: 'Oswald', sans-serif;">
+                            <li>Email: support@zago.org</li>
+                            <li>Phone: +91 123-456-7890</li>
+                            <li>Address: Kochi, Kerala, India</li>
+                        </ul>
+                    </div>
+                </div>
+                <p class="text-center text-offwhite mt-8" style="font-family: 'Oswald', sans-serif;">
+                    © 2025 Zago. All rights reserved.
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        const deathData = [
+            { year: 2017, deaths: 233 },
+            { year: 2018, deaths: 224 },
+            { year: 2019, deaths: 239 },
+            { year: 2020, deaths: 200 },
+            { year: 2021, deaths: 210 },
+            { year: 2022, deaths: 204 },
+            { year: 2023, deaths: 200 },
+            { year: 2024, deaths: 190 }
+        ];
+
+        const avatarContainer = document.getElementById('avatarContainer');
+        const avatars = [];
+        const avatarCount = 1000;
+
+        function createAvatars() {
+            for (let i = 0; i < avatarCount; i++) {
+                const avatar = document.createElement('div');
+                avatar.classList.add('avatar');
+                avatar.style.left = Math.random() * 100 + 'vw';
+                avatar.style.top = Math.random() * 100 + 'vh';
+                avatarContainer.appendChild(avatar);
+                avatars.push(avatar);
+            }
+        }
+
+        createAvatars();
+        let livingAvatars = [...avatars];
+
+        function resetAvatars() {
+            livingAvatars = [...avatars];
+            avatars.forEach(avatar => {
+                avatar.classList.remove('dying-red', 'dead');
+                avatar.style.opacity = '0.5';
+                avatar.style.left = Math.random() * 100 + 'vw';
+                avatar.style.top = Math.random() * 100 + 'vh';
+            });
+        }
+
+        async function killAvatars(count) {
+            for (let i = 0; i < count && livingAvatars.length > 0; i++) {
+                const randomIndex = Math.floor(Math.random() * livingAvatars.length);
+                const avatar = livingAvatars[randomIndex];
+
+                avatar.classList.add('dying-red');
+                await new Promise(resolve => setTimeout(resolve, 500));
+
+                avatar.classList.add('dead');
+                livingAvatars.splice(randomIndex, 1);
+            }
+        }
+
+        let currentIndex = 0;
+        const yearElement = document.getElementById('year');
+        const deathCountElement = document.getElementById('deathCount');
+        let currentCount = 0;
+        let targetCount = 0;
+
+        async function startCounter() {
+            resetAvatars();
+            const { year, deaths } = deathData[currentIndex];
+            yearElement.textContent = year;
+            currentCount = 0;
+            targetCount = deaths;
+
+            deathCountElement.classList.remove('opacity-0');
+            deathCountElement.classList.add('opacity-100', 'transition-opacity', 'duration-500');
+
+            const increment = Math.ceil(targetCount / 50);
+            let steps = 0;
+            const interval = setInterval(async () => {
+                currentCount += increment;
+                steps++;
+                if (currentCount >= targetCount) {
+                    currentCount = targetCount;
+                    clearInterval(interval);
+                }
+                deathCountElement.textContent = currentCount.toLocaleString();
+                await killAvatars(Math.ceil(increment / 2));
+            }, 50);
+
+            currentIndex++;
+            if (currentIndex < deathData.length) {
+                setTimeout(startCounter, 4000);
+            } else {
+                transitionToMain();
+            }
+        }
+
+        function transitionToMain() {
+            const loadingPage = document.getElementById('loadingPage');
+            const mainContent = document.getElementById('mainContent');
+
+            loadingPage.style.opacity = '0';
+            loadingPage.style.transition = 'opacity 1s ease';
+            setTimeout(() => {
+                loadingPage.style.display = 'none';
+                mainContent.style.display = 'block';
+                mainContent.classList.add('fade-in');
+            }, 1000);
+        }
+
+        startCounter();
+
+        // Skip button functionality
+        document.getElementById('skipButton').addEventListener('click', transitionToMain);
+
+        // Scroll animations for sections
+        const sections = document.querySelectorAll('.section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.2 });
+
+        sections.forEach(section => observer.observe(section));
+    </script>
+</body>
+
+</html>
