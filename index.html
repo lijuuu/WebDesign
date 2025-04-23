@@ -40,7 +40,7 @@
             width: 40px;
             height: 60px;
             background-size: cover;
-            background-image: url('/public/whiteavatar1.png');
+            /* background-image: url('/public/whiteavatar1.png'); */
             transition: opacity 1s ease;
             opacity: 0.5;
         }
@@ -454,7 +454,9 @@
                 </h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <div class="bg-black p-6 rounded-lg border border-offwhite">
-                        <div class="support-group mb-4"></div>
+                        <div class="bg-black h-40 rounded-lg mb-4 flex items-center justify-center border border-offwhite overflow-hidden">
+                            <img src="/public/parentsupport.jpg" alt="Teens in a support group meeting" class="object-cover h-full w-full" style="max-width:100%; max-height:100%; display:block;" />
+                        </div>
                         <h3 class="text-xl font-semibold mb-2" style="font-family: 'Anton', sans-serif;">Understanding
                             Teen Substance Abuse</h3>
                         <p class="text-offwhite mb-4" style="font-family: 'Oswald', sans-serif;">
@@ -525,7 +527,7 @@
                     </div>
                 </div>
                 <p class="text-center text-offwhite mt-8" style="font-family: 'Oswald', sans-serif;">
-                    © 2025 Say No to Drugs. All rights reserved.
+                    2025 Say No to Drugs. All rights reserved.
                 </p>
             </div>
         </footer>
@@ -545,7 +547,7 @@
 
         const avatarContainer = document.getElementById('avatarContainer');
         const avatars = [];
-        const avatarCount = 1000;
+        const avatarCount = 50;
 
         function createAvatars() {
             for (let i = 0; i < avatarCount; i++) {
