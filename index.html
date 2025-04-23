@@ -40,7 +40,7 @@
             width: 40px;
             height: 60px;
             background-size: cover;
-            background-image: url('/public/whiteavatar.png');
+            background-image: url('/public/whiteavatar1.png');
             transition: opacity 1s ease;
             opacity: 0.5;
         }
@@ -50,7 +50,7 @@
         }
 
         .avatar.dead {
-            background-image: url('/public/darkavatar.png');
+            background-image: url('/public/blackavatar.png');
             opacity: 0;
         }
 
@@ -130,6 +130,72 @@
         .hover\:bg-dark-offwhite:hover {
             background: #E5E5E5;
         }
+
+        /* Image Cropping Styles with Minimal Zoom */
+        .family-picnic {
+            background-image: url('/public/familypicnic.png');
+            background-size: 100%;
+            /* No zoom */
+            background-position: center 90%;
+            /* Crop top (trees, sky) */
+            background-repeat: no-repeat;
+            height: 300px;
+            width: 100%;
+            border-radius: 8px;
+            border: 1px solid #F5F5F5;
+        }
+
+        .mountain-standing {
+            background-image: url('/public/mountainstanding.png');
+            background-size: 110%;
+            /* Minimal zoom to crop sky */
+            background-position: center 80%;
+            /* Crop top (sky) */
+            background-repeat: no-repeat;
+            height: 200px;
+            width: 100%;
+            border-radius: 8px;
+            border: 1px solid #F5F5F5;
+        }
+
+        .parent-support {
+            background-image: url('/public/parentsupport.jpg');
+            background-size: 100%;
+            /* No zoom */
+            background-position: center 50%;
+            /* Crop left (thought bubble) */
+            background-repeat: no-repeat;
+            height: 200px;
+            width: 100%;
+            border-radius: 8px;
+            border: 1px solid #F5F5F5;
+        }
+
+        .bar-chart {
+            background-image: url('/public/barchart.png');
+            background-size: 120%;
+            /* Minimal zoom to crop text */
+            background-position: center 60%;
+            /* Crop top and bottom text */
+            background-repeat: no-repeat;
+            height: 300px;
+            width: 100%;
+            border-radius: 8px;
+            border: 1px solid #F5F5F5;
+        }
+
+        .support-group {
+            background-image: url('/public/supportgroup.png');
+            background-size: 100%;
+            /* No zoom */
+            background-position: center 90%;
+            /* Crop top text */
+            background-repeat: no-repeat;
+            height: 200px;
+            width: 100%;
+            border-radius: 8px;
+            border: 1px solid #F5F5F5;
+        }
     </style>
 </head>
 
@@ -159,7 +225,7 @@
         <!-- Header -->
         <header class="bg-black py-4 fixed top-0 w-full z-10">
             <nav class="container mx-auto flex justify-between items-center px-4">
-                <div class="text-3xl font-bold" style="font-family: 'Anton', sans-serif;">Zago</div>
+                <div class="text-3xl font-bold" style="font-family: 'Anton', sans-serif;">Say No to Drugs</div>
                 <div class="space-x-4">
                     <a href="#home" class="text-offwhite hover:text-red-500"
                         style="font-family: 'Oswald', sans-serif;">Home</a>
@@ -217,12 +283,7 @@
                         </ul>
                     </div>
                     <div class="md:w-1/2">
-                        <div class="bg-black h-64 rounded-lg flex items-center justify-center border border-offwhite">
-                            <p class="text-offwhite italic" style="font-family: 'Oswald', sans-serif;">Illustration
-                                Prompt: A bold scene of a happy family enjoying a picnic in a park, symbolizing a
-                                drug-free, healthy lifestyle. Use a black background with red and offwhite accents for a
-                                dramatic effect.</p>
-                        </div>
+                        <div class="family-picnic"></div>
                     </div>
                 </div>
             </div>
@@ -315,12 +376,7 @@
                         </ul>
                     </div>
                     <div class="md:w-1/2">
-                        <div class="bg-black h-64 rounded-lg flex items-center justify-center border border-offwhite">
-                            <p class="text-offwhite italic" style="font-family: 'Oswald', sans-serif;">Illustration
-                                Prompt: A dramatic bar chart showing the rise in drug abuse cases in Kerala from 2017 to
-                                2024, with a focus on synthetic drugs. Use a black background with red bars and offwhite
-                                labels for a bold, impactful look.</p>
-                        </div>
+                        <div class="bar-chart"></div>
                     </div>
                 </div>
             </div>
@@ -398,13 +454,7 @@
                 </h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <div class="bg-black p-6 rounded-lg border border-offwhite">
-                        <div
-                            class="bg-black h-40 rounded-lg mb-4 flex items-center justify-center border border-offwhite">
-                            <p class="text-offwhite italic" style="font-family: 'Oswald', sans-serif;">Illustration
-                                Prompt: A dramatic scene of a group of teens in a support group meeting, sharing their
-                                experiences. Use a black background with red and offwhite tones for a bold, impactful
-                                look.</p>
-                        </div>
+                        <div class="support-group mb-4"></div>
                         <h3 class="text-xl font-semibold mb-2" style="font-family: 'Anton', sans-serif;">Understanding
                             Teen Substance Abuse</h3>
                         <p class="text-offwhite mb-4" style="font-family: 'Oswald', sans-serif;">
@@ -414,13 +464,7 @@
                             More</a>
                     </div>
                     <div class="bg-black p-6 rounded-lg border border-offwhite">
-                        <div
-                            class="bg-black h-40 rounded-lg mb-4 flex items-center justify-center border border-offwhite">
-                            <p class="text-offwhite italic" style="font-family: 'Oswald', sans-serif;">Illustration
-                                Prompt: A bold illustration of a parent comforting a child during a therapy session,
-                                symbolizing support in recovery. Use a black background with red and offwhite accents
-                                for a dramatic effect.</p>
-                        </div>
+                        <div class="parent-support mb-4"></div>
                         <h3 class="text-xl font-semibold mb-2" style="font-family: 'Anton', sans-serif;">Guiding Your
                             Child Through Recovery</h3>
                         <p class="text-offwhite mb-4" style="font-family: 'Oswald', sans-serif;">
@@ -430,13 +474,7 @@
                             More</a>
                     </div>
                     <div class="bg-black p-6 rounded-lg border border-offwhite">
-                        <div
-                            class="bg-black h-40 rounded-lg mb-4 flex items-center justify-center border border-offwhite">
-                            <p class="text-offwhite italic" style="font-family: 'Oswald', sans-serif;">Illustration
-                                Prompt: A dramatic scene of an individual standing triumphantly on a mountain,
-                                symbolizing recovery success. Use a black background with red and offwhite tones for a
-                                bold, impactful look.</p>
-                        </div>
+                        <div class="mountain-standing mb-4"></div>
                         <h3 class="text-xl font-semibold mb-2" style="font-family: 'Anton', sans-serif;">Stories of Hope
                             and Healing</h3>
                         <p class="text-offwhite mb-4" style="font-family: 'Oswald', sans-serif;">
@@ -454,7 +492,8 @@
             <div class="container mx-auto">
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                     <div>
-                        <h3 class="text-2xl font-semibold mb-4" style="font-family: 'Anton', sans-serif;">Zago</h3>
+                        <h3 class="text-2xl font-semibold mb-4" style="font-family: 'Anton', sans-serif;">Say No to
+                            Drugs</h3>
                         <p class="text-offwhite" style="font-family: 'Oswald', sans-serif;">
                             Fighting drug abuse in Kerala, one step at a time.
                         </p>
@@ -479,14 +518,14 @@
                         <h3 class="text-2xl font-semibold mb-4" style="font-family: 'Anton', sans-serif;">Contact Info
                         </h3>
                         <ul class="text-offwhite space-y-2" style="font-family: 'Oswald', sans-serif;">
-                            <li>Email: support@zago.org</li>
+                            <li>Email: support@saynotodrugs.org</li>
                             <li>Phone: +91 123-456-7890</li>
                             <li>Address: Kochi, Kerala, India</li>
                         </ul>
                     </div>
                 </div>
                 <p class="text-center text-offwhite mt-8" style="font-family: 'Oswald', sans-serif;">
-                    © 2025 Zago. All rights reserved.
+                    © 2025 Say No to Drugs. All rights reserved.
                 </p>
             </div>
         </footer>
